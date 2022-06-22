@@ -5,7 +5,6 @@ CREATE TABLE    IF NOT EXISTS "public"."users" (
     "created_at"            TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "updated_at"            TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     "firebase_uid"          TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("firebase_uid") > 0),
-    "name"                  TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("name") > 0),
     "email"                 TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("email") > 0),
     "age"                   INTEGER                  NOT NULL CHECK ("age" > 0),
     "role"                  TEXT                     NOT NULL CHECK (CHARACTER_LENGTH("role") > 0),
