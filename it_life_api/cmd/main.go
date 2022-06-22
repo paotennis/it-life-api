@@ -34,7 +34,7 @@ func main() {
 
 	engine.GET("/", func(context *gin.Context) {
 		context.JSON(http.StatusOK, gin.H{
-			"message": "Hello IT Life",
+			"message": "Hello ITLife",
 		})
 	})
 
