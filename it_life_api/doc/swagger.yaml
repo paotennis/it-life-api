@@ -1,0 +1,90 @@
+---
+swagger: "2.0"
+info:
+  description: "RESTful API for ITLife"
+  version: "2022-06-23T00:00:00Z"
+  title: "ITLife API"
+host: "localhost:8000"
+schemes:
+  - "https"
+paths:
+  /:
+    get:
+      tags:
+        - "root"
+      responses:
+        200:
+          description: "Check healthy"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+                example: "Hello ITLife"
+      security:
+        - api_key: []
+  /users:
+    post:
+      tags:
+        - "users"
+      parameters:
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/userPostRequestBody"
+      responses:
+        200:
+          description: "Create a user"
+          schema:
+            $ref: "#/definitions/userResponse"
+      security:
+        - api_key: []
+definitions:
+  userResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      firebaseUid:
+        type: "string"
+        example: "firebaseUid"
+      email:
+        type: "string"
+        example: "example@example.com"
+      age:
+        type: "integer"
+        format: "int64"
+        example: 20
+      role:
+        type: "string"
+        example: "role"
+      company:
+        type: "string"
+        example: "company"
+  userPostRequestBody:
+    type: "object"
+    properties:
+      firebaseUid:
+        type: "string"
+        example: "firebaseUid"
+      email:
+        type: "string"
+        example: "example@example.com"
+      age:
+        type: "integer"
+        format: "int64"
+        example: 20
+      role:
+        type: "string"
+        example: "role"
+      company:
+        type: "string"
+        example: "company"
+securityDefinitions:
+  api_key:
+    type: "apiKey"
+    name: "x-api-key"
+    in: "header"
