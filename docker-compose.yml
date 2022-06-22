@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  it-life-api:
+    build: .
+    depends_on:
+      - it-life-db
+    container_name: it-life-api
+    environment:
+      - GO_ENV=local
+      - DBMS=postgres
+      - DB_NAME=it_life
+      - DB_HOST=host.docker.internal
+      - DB_PORT=5433
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    volumes:
+      - ./it_life_api:/go/src
+    command: go run cmd/main.go
+    tty: true
+    ports:
+      - 8000:8000
+  it-life-db:
+    image: postgres:13.6-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=it_life
+    container_name: it-life-db
+    volumes:
+      - ./it_life_database/definition:/docker-entrypoint-initdb.d # Init database and insert initial data.
+      - ./it_life_database/data:/var/lib/postgresql/data # Preserve data.
+    tty: true
+    ports:
+      - 5433:5432
