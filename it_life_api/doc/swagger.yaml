@@ -267,6 +267,10 @@ definitions:
         type: "integer"
         format: "int64"
         example: 7
+      eventCount:
+        type: "integer"
+        format: "int64"
+        example: 14
 securityDefinitions:
   api_key:
     type: "apiKey"
