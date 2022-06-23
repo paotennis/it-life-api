@@ -24,6 +24,18 @@ paths:
       security:
         - api_key: []
   /users:
+    get:
+      tags:
+        - "users"
+      responses:
+        200:
+          description: "Get users"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/userWithWeekDataResponse"
+      security:
+        - api_key: []
     post:
       tags:
         - "users"
@@ -38,6 +50,45 @@ paths:
           description: "Create a user"
           schema:
             $ref: "#/definitions/userResponse"
+      security:
+        - api_key: []
+  /users/{id}:
+    get:
+      tags:
+        - "users"
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          type: "number"
+        - name: "startDate"
+          in: "query"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Get a user by id"
+          schema:
+            $ref: "#/definitions/userWithWeekEventResponse"
+      security:
+        - api_key: []
+  /events:
+    post:
+      tags:
+        - "events"
+      parameters:
+        - name: "body"
+          in: "body"
+          required: true
+          schema:
+            $ref: "#/definitions/eventPostRequestBody"
+      responses:
+        200:
+          description: "Create events"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/eventResponse"
       security:
         - api_key: []
 definitions:
@@ -64,6 +115,100 @@ definitions:
       company:
         type: "string"
         example: "company"
+  eventResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        format: "int64"
+        example: 1
+      userId:
+        type: "integer"
+        format: "int64"
+        example: 1
+      name:
+        type: "string"
+        example: "name"
+      description:
+        type: "string"
+        example: "description"
+      startsAt:
+        type: "string"
+        format: "date-time"
+        example: "2000-01-01T00:00:00Z"
+      endsAt:
+        type: "string"
+        format: "date-time"
+        example: "2000-01-01T00:00:00Z"
+  userWithWeekDataResponse:
+    type: "object"
+    properties:
+      userId:
+        type: "integer"
+        format: "int64"
+        example: 1
+      age:
+        type: "integer"
+        format: "int64"
+        example: 20
+      role:
+        type: "string"
+        example: "role"
+      company:
+        type: "string"
+        example: "company"
+      weekData:
+        type: "array"
+        items:
+          $ref: "#/definitions/weekItem"
+  userWithWeekEventResponse:
+    type: "object"
+    properties:
+      userId:
+        type: "integer"
+        format: "int64"
+        example: 1
+      startDate:
+        type: "string"
+        example: "2000/01/01"
+      age:
+        type: "integer"
+        format: "int64"
+        example: 20
+      role:
+        type: "string"
+        example: "role"
+      company:
+        type: "string"
+        example: "company"
+      monday:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
+      tuesday:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
+      wednesday:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
+      thursday:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
+      friday:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
+      saturday:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
+      sunday:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
   userPostRequestBody:
     type: "object"
     properties:
@@ -83,6 +228,45 @@ definitions:
       company:
         type: "string"
         example: "company"
+  eventPostRequestBody:
+    type: "object"
+    properties:
+      userId:
+        type: "integer"
+        format: "int64"
+        example: 1
+      date:
+        type: "string"
+        example: "2000/01/01"
+      events:
+        type: "array"
+        items:
+          $ref: "#/definitions/eventItem"
+  eventItem:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        example: "name"
+      startTime:
+        type: "string"
+        example: "9:00"
+      endTime:
+        type: "string"
+        example: "12:00"
+      description:
+        type: "string"
+        example: "description"
+  weekItem:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+        example: "2000/01/01"
+      dateCount:
+        type: "integer"
+        format: "int64"
+        example: 7
 securityDefinitions:
   api_key:
     type: "apiKey"
