@@ -6,6 +6,8 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+
+	"github.com/rikuhatano09/it-life-api/internal/interfaces/handler"
 )
 
 func main() {
@@ -37,6 +39,7 @@ func main() {
 			"message": "Hello ITLife",
 		})
 	})
+	engine.POST("/users", handler.CreateUser)
 
 	engine.Run(":8000")
 }

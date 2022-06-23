@@ -8,7 +8,6 @@ services:
     container_name: it-life-api
     environment:
       - GO_ENV=local
-      - DBMS=postgres
       - DB_NAME=it_life
       - DB_HOST=host.docker.internal
       - DB_PORT=5433
