@@ -15,20 +15,22 @@ func StrToTime(day string, times string) time.Time {
 	return parsedTime
 }
 
-func CreateEvent(requestBody contract.EventPostRequestBody) (model.Event, error) {
+func CreateEvent(requestBody contract.EventPostRequestBody) (contract.EventPostRequestBody, model.Event, error) {
 	eventPersistence := persistence.NewEventPersistence()
 
-	event := model.Event{
-		UserID:      requestBody.UserId,
-		Name:        requestBody.Events.Name,
-		Description: requestBody.Events.Description,
-		StartsAt:    StrToTime(requestBody.Date, requestBody.Events.StartTime),
-		EndsAt:      StrToTime(requestBody.Date, requestBody.Events.EndTime),
-	}
+	for i := 0; i < len(requestBody.Events); i++ {
+		event := model.Event{
+			UserID:      requestBody.UserId,
+			Name:        requestBody.Events[i].Name,
+			Description: requestBody.Events[i].Description,
+			StartsAt:    StrToTime(requestBody.Date, requestBody.Events[i].StartTime),
+			EndsAt:      StrToTime(requestBody.Date, requestBody.Events[i].EndTime),
+		}
 
-	event, err := eventPersistence.Create(event)
-	if err != nil {
-		return model.Event{}, err
+		event, err := eventPersistence.Create(event)
+		if err != nil {
+			return requestBody, model.Event{}, err
+		}
 	}
-	return event, nil
+	return requestBody, model.Event{}, nil
 }
