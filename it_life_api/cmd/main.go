@@ -40,6 +40,7 @@ func main() {
 		})
 	})
 	engine.POST("/users", handler.CreateUser)
+	engine.POST("/events", handler.CreateEvent)
 
 	engine.Run(":8000")
 }

@@ -10,3 +10,22 @@ type (
 		Company     string `json:"company"`
 	}
 )
+
+type (
+	// EventPostRequestBody is request body for creating a event.
+	EventPostRequestBody struct {
+		UserId int64  `json:"userId"`
+		Date   string `json:"date"`
+		Events EventItem
+	}
+)
+
+type (
+	// EventItem is event structure definition.
+	EventItem struct {
+		Name        string `json:"name"`
+		StartTime   string `json:"startTime"`
+		EndTime     string `json:"endTime"`
+		Description string `json:"description"`
+	}
+)
