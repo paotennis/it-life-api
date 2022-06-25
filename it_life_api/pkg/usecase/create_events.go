@@ -6,7 +6,7 @@ import (
 	"github.com/rikuhatano09/it-life-api/pkg/domain/model"
 )
 
-func CreateEvent(requestBody contract.EventPostRequestBody) ([]model.Event, error) {
+func CreateEvents(requestBody contract.EventPostRequestBody) ([]model.Event, error) {
 	eventPersistence := persistence.NewEventPersistence()
 	events := []model.Event{}
 

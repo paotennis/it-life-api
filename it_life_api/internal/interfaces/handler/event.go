@@ -10,7 +10,7 @@ import (
 	"github.com/rikuhatano09/it-life-api/pkg/usecase"
 )
 
-func CreateEvent(context *gin.Context) {
+func CreateEvents(context *gin.Context) {
 	requestBody := contract.EventPostRequestBody{}
 
 	err := context.ShouldBindJSON(&requestBody)
@@ -21,7 +21,7 @@ func CreateEvent(context *gin.Context) {
 		return
 	}
 
-	events, err := usecase.CreateEvent(requestBody)
+	events, err := usecase.CreateEvents(requestBody)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": fmt.Sprintf("Internal server error: %s", err.Error()),
