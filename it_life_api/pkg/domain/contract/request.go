@@ -14,14 +14,14 @@ type (
 type (
 	// EventPostRequestBody is request body for creating a event.
 	EventPostRequestBody struct {
-		UserId int64       `json:"userId"`
+		UserID uint64      `json:"userId"`
 		Date   string      `json:"date"`
 		Events []EventItem `json:"events"`
 	}
 )
 
 type (
-	// EventItem is event structure definition.
+	// EventItem is an element of events.
 	EventItem struct {
 		Name        string `json:"name"`
 		StartTime   string `json:"startTime"`

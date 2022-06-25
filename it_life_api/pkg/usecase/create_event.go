@@ -20,7 +20,7 @@ func CreateEvent(requestBody contract.EventPostRequestBody) (contract.EventPostR
 
 	for i := 0; i < len(requestBody.Events); i++ {
 		event := model.Event{
-			UserID:      requestBody.UserId,
+			UserID:      requestBody.UserID,
 			Name:        requestBody.Events[i].Name,
 			Description: requestBody.Events[i].Description,
 			StartsAt:    StrToTime(requestBody.Date, requestBody.Events[i].StartTime),
