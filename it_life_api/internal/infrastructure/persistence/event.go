@@ -8,20 +8,20 @@ import (
 )
 
 type (
-	// UserPersistence is a persistence to preserve users.
+	// EventPersistence is a persistence to preserve events.
 	EventPersistence struct {
 		Connection *gorm.DB
 	}
 )
 
-// NewUserPersistence creates a new user persistence.
+// NewEventPersistence creates a new event persistence.
 func NewEventPersistence() repository.EventRepository {
 	return EventPersistence{
 		Connection: getDBConnection(),
 	}
 }
 
-// Create create a user.
+// Create create a event.
 func (eventPersistence EventPersistence) Create(event model.Event) (model.Event, error) {
 	result := eventPersistence.Connection.
 		Create(&event)

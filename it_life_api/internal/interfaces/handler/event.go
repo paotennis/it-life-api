@@ -21,12 +21,12 @@ func CreateEvent(context *gin.Context) {
 		return
 	}
 
-	event, _, err := usecase.CreateEvent(requestBody)
+	events, err := usecase.CreateEvent(requestBody)
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{
 			"message": fmt.Sprintf("Internal server error: %s", err.Error()),
 		})
 		return
 	}
-	context.JSON(http.StatusOK, event)
+	context.JSON(http.StatusOK, events)
 }

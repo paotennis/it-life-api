@@ -1,5 +1,7 @@
 package contract
 
+import "time"
+
 type (
 	// UserPostRequestBody is request body for creating a user.
 	UserPostRequestBody struct {
@@ -29,3 +31,21 @@ type (
 		Description string `json:"description"`
 	}
 )
+
+func (eventItem EventItem) GetStartsAt(date string) time.Time {
+	startsAt, err := time.Parse("2006/01/02 15:04", date+" "+eventItem.StartTime)
+	if err != nil {
+		// TODO: Custom error handling
+		panic(err)
+	}
+	return startsAt
+}
+
+func (eventItem EventItem) GetEndsAt(date string) time.Time {
+	endsAt, err := time.Parse("2006/01/02 15:04", date+" "+eventItem.EndTime)
+	if err != nil {
+		// TODO: Custom error handling
+		panic(err)
+	}
+	return endsAt
+}
