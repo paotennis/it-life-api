@@ -15,6 +15,9 @@ func main() {
 
 	// Set CORS config.
 	engine.Use(cors.New(cors.Config{
+		AllowOrigins: []string{
+			"*",
+		},
 		AllowMethods: []string{
 			"GET",
 			"POST",

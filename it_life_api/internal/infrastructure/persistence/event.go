@@ -35,7 +35,9 @@ func (eventPersistence EventPersistence) GetWeekItemByUserID(userID uint64) ([]c
 
 	result := eventPersistence.Connection.
 		Model(&model.Event{}).
-		Select(`TO_CHAR("beginning_week_date", 'YYYY/MM/DD') as "date"`).
+		Select(`TO_CHAR("beginning_week_date", 'YYYY/MM/DD') AS "date", COUNT(*) AS "event_count"`).
+		Where(`"user_id" = ?`, userID).
+		Group("beginning_week_date").
 		Find(&weekItems)
 
 	return weekItems, result.Error
