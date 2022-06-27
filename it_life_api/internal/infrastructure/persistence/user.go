@@ -28,3 +28,12 @@ func (userPersistence UserPersistence) Create(user model.User) (model.User, erro
 
 	return user, result.Error
 }
+
+func (userPersistence UserPersistence) GetAll() ([]model.User, error) {
+	users := []model.User{}
+
+	result := userPersistence.Connection.
+		Find(&users)
+
+	return users, result.Error
+}

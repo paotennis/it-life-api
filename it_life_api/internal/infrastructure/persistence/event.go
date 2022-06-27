@@ -3,6 +3,7 @@ package persistence
 import (
 	"gorm.io/gorm"
 
+	"github.com/rikuhatano09/it-life-api/pkg/domain/contract"
 	"github.com/rikuhatano09/it-life-api/pkg/domain/model"
 	"github.com/rikuhatano09/it-life-api/pkg/domain/repository"
 )
@@ -27,4 +28,15 @@ func (eventPersistence EventPersistence) Create(event model.Event) (model.Event,
 		Create(&event)
 
 	return event, result.Error
+}
+
+func (eventPersistence EventPersistence) GetWeekItemByUserID(userID uint64) ([]contract.WeekItem, error) {
+	weekItems := []contract.WeekItem{}
+
+	result := eventPersistence.Connection.
+		Model(&model.Event{}).
+		Select(`TO_CHAR("beginning_week_date", 'YYYY/MM/DD') as "date"`).
+		Find(&weekItems)
+
+	return weekItems, result.Error
 }
