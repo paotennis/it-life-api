@@ -1,5 +1,7 @@
 package contract
 
+import "time"
+
 type (
 	// UserWithWeekDataResponse is response of user with week data.
 	UserWithWeekDataResponse struct {
@@ -17,3 +19,12 @@ type (
 		EventCount uint32 `json:"eventCount"`
 	}
 )
+
+func (weekItem WeekItem) ParseDateStringToTime() time.Time {
+	date, err := time.Parse("2006/01/02", weekItem.Date)
+	if err != nil {
+		// TODO: Custom error handling.
+		panic(err)
+	}
+	return date
+}

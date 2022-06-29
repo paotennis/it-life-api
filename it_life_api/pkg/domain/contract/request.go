@@ -31,7 +31,7 @@ type (
 func (eventPostRequestBody EventPostRequestBody) GetBeginningWeekDate() time.Time {
 	eventDate, err := time.Parse("2006/01/02", eventPostRequestBody.Date)
 	if err != nil {
-		// TODO: Custom error handling
+		// TODO: Custom error handling.
 		panic(err)
 	}
 	weekDay := eventDate.Weekday()
@@ -48,7 +48,7 @@ func (eventPostRequestBody EventPostRequestBody) GetBeginningWeekDate() time.Tim
 func (eventItem EventItem) GetStartsAt(date string) time.Time {
 	startsAt, err := time.Parse("2006/01/02 15:04", date+" "+eventItem.StartTime)
 	if err != nil {
-		// TODO: Custom error handling
+		// TODO: Custom error handling.
 		panic(err)
 	}
 	return startsAt
@@ -57,7 +57,7 @@ func (eventItem EventItem) GetStartsAt(date string) time.Time {
 func (eventItem EventItem) GetEndsAt(date string) time.Time {
 	endsAt, err := time.Parse("2006/01/02 15:04", date+" "+eventItem.EndTime)
 	if err != nil {
-		// TODO: Custom error handling
+		// TODO: Custom error handling.
 		panic(err)
 	}
 	return endsAt

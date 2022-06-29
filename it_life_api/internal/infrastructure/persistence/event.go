@@ -40,5 +40,23 @@ func (eventPersistence EventPersistence) GetWeekItemByUserID(userID uint64) ([]c
 		Group("beginning_week_date").
 		Find(&weekItems)
 
+	if result.Error != nil {
+		return weekItems, result.Error
+	}
+
+	// TODO: Change logic to get date count.
+	for index := range weekItems {
+		var dateCount int64
+		result := eventPersistence.Connection.
+			Table("events").
+			Select(`COUNT(DISTINCT(CAST("starts_at" AS DATE)))`).
+			Where(`"user_id" = ? AND "beginning_week_date" = ?`, userID, weekItems[index].ParseDateStringToTime()).
+			Count(&dateCount)
+
+		if result.Error != nil {
+			return weekItems, result.Error
+		}
+		weekItems[index].DateCount = uint32(dateCount)
+	}
 	return weekItems, result.Error
 }
