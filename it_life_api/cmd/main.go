@@ -16,7 +16,7 @@ func main() {
 	// Set CORS config.
 	engine.Use(cors.New(cors.Config{
 		AllowOrigins: []string{
-			"http://localhost:3000",
+			"*",
 		},
 		AllowMethods: []string{
 			"GET",
@@ -39,7 +39,10 @@ func main() {
 			"message": "Hello ITLife",
 		})
 	})
+
+	engine.GET("/users", handler.GetUsers)
 	engine.POST("/users", handler.CreateUser)
+
 	engine.POST("/events", handler.CreateEvents)
 
 	engine.Run(":8000")

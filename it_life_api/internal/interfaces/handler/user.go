@@ -30,3 +30,14 @@ func CreateUser(context *gin.Context) {
 	}
 	context.JSON(http.StatusOK, user)
 }
+
+func GetUsers(context *gin.Context) {
+	users, err := usecase.GetUsers()
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Internal server error: %s", err.Error()),
+		})
+		return
+	}
+	context.JSON(http.StatusOK, users)
+}

@@ -12,11 +12,12 @@ func CreateEvents(requestBody contract.EventPostRequestBody) ([]model.Event, err
 
 	for _, eventItem := range requestBody.Events {
 		event := model.Event{
-			UserID:      requestBody.UserID,
-			Name:        eventItem.Name,
-			Description: eventItem.Description,
-			StartsAt:    eventItem.GetStartsAt(requestBody.Date),
-			EndsAt:      eventItem.GetEndsAt(requestBody.Date),
+			UserID:            requestBody.UserID,
+			Name:              eventItem.Name,
+			Description:       eventItem.Description,
+			BeginningWeekDate: requestBody.GetBeginningWeekDate(),
+			StartsAt:          eventItem.GetStartsAt(requestBody.Date),
+			EndsAt:            eventItem.GetEndsAt(requestBody.Date),
 		}
 
 		event, err := eventPersistence.Create(event)
