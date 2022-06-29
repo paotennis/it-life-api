@@ -2,9 +2,9 @@
 swagger: "2.0"
 info:
   description: "RESTful API for ITLife"
-  version: "2022-06-23T00:00:00Z"
+  version: "2022-06-30T00:00:00Z"
   title: "ITLife API"
-host: "https://it-life-api.herokuapp.com"
+host: "it-life-api.herokuapp.com"
 schemes:
   - "https"
 paths:
@@ -71,6 +71,22 @@ paths:
           description: "Get a user by id"
           schema:
             $ref: "#/definitions/userWithWeekEventResponse"
+      security:
+        - api_key: []
+  /users/firebase/{firebaseUid}:
+    get:
+      tags:
+        - "users"
+      parameters:
+        - name: "firebaseUid"
+          in: "path"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Get a user by Firebase uid"
+          schema:
+            $ref: "#/definitions/userResponse"
       security:
         - api_key: []
   /events:
