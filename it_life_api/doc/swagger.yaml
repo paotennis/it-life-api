@@ -4,7 +4,7 @@ info:
   description: "RESTful API for ITLife"
   version: "2022-06-23T00:00:00Z"
   title: "ITLife API"
-host: "localhost:8000"
+host: "https://it-life-api.herokuapp.com"
 schemes:
   - "https"
 paths:
