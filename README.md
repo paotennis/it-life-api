@@ -8,9 +8,15 @@ An awesome API for project "ITLife".
 
 ### Requirements
 
+| tool | version |
+| --- | --- |
+| Go | ^1.18 |
+
+### Dependencies
+
 See modules list in `go.mod`.
 
-### Setup
+### Setup in local environments
 
 1. Start application
 
@@ -21,6 +27,15 @@ See modules list in `go.mod`.
 
     Server starts on localhost.
     See "http://127.0.0.1:8000/".
+
+### Deployment
+
+You can deploy manually by the bellow command.  
+
+```sh
+heroku container:push web
+heroku container:release web
+```
 
 
 ## ITLife Database
@@ -36,7 +51,7 @@ See modules list in `go.mod`.
     Initialization DDLs.
     They should be always synced with production database schema.
 
-## Usage
+### Usage in local environments
 
 - Initialize (Reinitialize)
 
