@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -47,5 +48,5 @@ func main() {
 
 	engine.POST("/events", handler.CreateEvents)
 
-	engine.Run(":8000")
+	engine.Run(":" + os.Getenv("PORT"))
 }

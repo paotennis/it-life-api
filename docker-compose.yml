@@ -13,6 +13,7 @@ services:
       - DB_PORT=5433
       - DB_USER=postgres
       - DB_PASSWORD=postgres
+      - PORT=8000
     volumes:
       - ./it_life_api:/go/src
     command: go run cmd/main.go
