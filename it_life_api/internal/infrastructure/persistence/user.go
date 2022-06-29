@@ -47,3 +47,13 @@ func (userPersistence UserPersistence) FindByID(id uint64) (model.User, error) {
 
 	return user, result.Error
 }
+
+func (userPersistence UserPersistence) FindByFirebaseUID(firebaseUID string) (model.User, error) {
+	user := model.User{}
+
+	result := userPersistence.Connection.
+		Where(`"firebase_uid" = ?`, firebaseUID).
+		Find(&user)
+
+	return user, result.Error
+}

@@ -61,3 +61,15 @@ func GetUserByID(context *gin.Context) {
 	}
 	context.JSON(http.StatusOK, user)
 }
+
+func GetUserByFirebaseUID(context *gin.Context) {
+	firebaseUID := context.Param("firebaseUID")
+	user, err := usecase.GetUserByFirebaseUID(firebaseUID)
+	if err != nil {
+		context.JSON(http.StatusInternalServerError, gin.H{
+			"message": fmt.Sprintf("Internal server error: %s", err.Error()),
+		})
+		return
+	}
+	context.JSON(http.StatusOK, user)
+}

@@ -42,10 +42,9 @@ func main() {
 	})
 
 	engine.GET("/users", handler.GetUsers)
-	engine.POST("/users", handler.CreateUser)
-
 	engine.GET("/users/:id", handler.GetUserByID)
-
+	engine.GET("/users/firebase/:firebaseUID", handler.GetUserByFirebaseUID)
+	engine.POST("/users", handler.CreateUser)
 	engine.POST("/events", handler.CreateEvents)
 
 	engine.Run(":" + os.Getenv("PORT"))
