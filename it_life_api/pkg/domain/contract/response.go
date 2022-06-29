@@ -12,6 +12,22 @@ type (
 		WeekData []WeekItem `json:"weekData"`
 	}
 
+	// UserWithWeekEventResponse is response of user with week events.
+	UserWithWeekEventResponse struct {
+		UserID    uint64      `json:"userId"`
+		StartDate string      `json:"startDate"`
+		Age       uint32      `json:"age"`
+		Role      string      `json:"role"`
+		Company   string      `json:"company"`
+		Monday    []EventItem `json:"monday"`
+		Tuesday   []EventItem `json:"tuesday"`
+		Wednesday []EventItem `json:"wednesday"`
+		Thursday  []EventItem `json:"thursday"`
+		Friday    []EventItem `json:"friday"`
+		Saturday  []EventItem `json:"saturday"`
+		Sunday    []EventItem `json:"sunday"`
+	}
+
 	// WeekItem is an element of week data.
 	WeekItem struct {
 		Date       string `json:"date"`

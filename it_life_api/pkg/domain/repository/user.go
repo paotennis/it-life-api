@@ -6,5 +6,6 @@ type (
 	UserRepository interface {
 		Create(model.User) (model.User, error)
 		GetAll() ([]model.User, error)
+		FindByID(uint64) (model.User, error)
 	}
 )

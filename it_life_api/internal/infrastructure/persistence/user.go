@@ -37,3 +37,13 @@ func (userPersistence UserPersistence) GetAll() ([]model.User, error) {
 
 	return users, result.Error
 }
+
+func (userPersistence UserPersistence) FindByID(id uint64) (model.User, error) {
+	user := model.User{}
+
+	result := userPersistence.Connection.
+		Where(`"id" = ?`, id).
+		Find(&user)
+
+	return user, result.Error
+}

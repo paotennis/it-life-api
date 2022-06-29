@@ -1,6 +1,8 @@
 package persistence
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 
 	"github.com/rikuhatano09/it-life-api/pkg/domain/contract"
@@ -59,4 +61,14 @@ func (eventPersistence EventPersistence) GetWeekItemByUserID(userID uint64) ([]c
 		weekItems[index].DateCount = uint32(dateCount)
 	}
 	return weekItems, result.Error
+}
+
+func (eventPersistence EventPersistence) GetByUserID(userID uint64, beginningWeekDate time.Time) ([]model.Event, error) {
+	events := []model.Event{}
+
+	result := eventPersistence.Connection.
+		Where(`"user_id" = ? AND "beginning_week_date" = ?`, userID, beginningWeekDate).
+		Find(&events)
+
+	return events, result.Error
 }

@@ -65,6 +65,7 @@ paths:
           in: "query"
           required: true
           type: "string"
+          description: "ex: 2000-01-01"
       responses:
         200:
           description: "Get a user by id"
